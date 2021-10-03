@@ -8,5 +8,7 @@ namespace io {
         virtual ~ILoadImg() = default;
 
         virtual cv::Mat loadImage(std::string path) = 0;
+
+        virtual cv::Mat loadImage(std::string path, cv::ImreadModes mode) = 0;
     };
 }
