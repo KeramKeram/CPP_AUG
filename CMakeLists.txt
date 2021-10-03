@@ -60,7 +60,7 @@ if(ENABLE_PCH)
     <utility>)
 endif()
 
-option(ENABLE_CONAN "Use Conan for dependency management" ON)
+option(ENABLE_CONAN "Use Conan for dependency management" OFF)
 if(ENABLE_CONAN)
   include(cmake/Conan.cmake)
   run_conan()
