@@ -1,41 +1,33 @@
-#include <functional>
-#include <iostream>
+#include <functional>  // for function
+#include <iostream>  // for basic_ostream::operator<<, operator<<, endl, basic_ostream, basic_ostream<>::__ostream_type, cout, ostream
+#include <string>    // for string, basic_string, allocator
+#include <vector>    // for vector
 
-#include <spdlog/spdlog.h>
-#include <docopt/docopt.h>
+#include "FTXUI/include/ftxui/component/captured_mouse.hpp"      // for ftxui
+#include "FTXUI/include/ftxui/component/component.hpp"           // for Menu
+#include "FTXUI/include/ftxui/component/component_options.hpp"   // for MenuOption
+#include "FTXUI/include/ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
 
-static constexpr auto USAGE =
-  R"(Naval Fate.
+int main(int, const char* []) {
+    using namespace ftxui;
+    auto screen = ScreenInteractive::TerminalOutput();
 
-    Usage:
-          naval_fate ship new <name>...
-          naval_fate ship <name> move <x> <y> [--speed=<kn>]
-          naval_fate ship shoot <x> <y>
-          naval_fate mine (set|remove) <x> <y> [--moored | --drifting]
-          naval_fate (-h | --help)
-          naval_fate --version
- Options:
-          -h --help     Show this screen.
-          --version     Show version.
-          --speed=<kn>  Speed in knots [default: 10].
-          --moored      Moored (anchored) mine.
-          --drifting    Drifting mine.
-)";
+    std::vector<std::string> entries = {
+            "entry 1",
+            "entry 2",
+            "entry 3",
+    };
+    int selected = 0;
 
-int main(int argc, const char **argv)
-{
-  std::map<std::string, docopt::value> args = docopt::docopt(USAGE,
-    { std::next(argv), std::next(argv, argc) },
-    true,// show help if requested
-    "Naval Fate 2.0");// version string
+    MenuOption option;
+    option.on_enter = screen.ExitLoopClosure();
+    auto menu = Menu(&entries, &selected, &option);
 
-  for (auto const &arg : args) {
-    std::cout << arg.first << "=" << arg.second << std::endl;
-  }
+    screen.Loop(menu);
 
-
-  //Use the default logger (stdout, multi-threaded, colored)
-  spdlog::info("Hello, {}!", "World");
-
-  fmt::print("Hello, from {}\n", "{fmt}");
+    std::cout << "Selected element = " << selected << std::endl;
 }
+
+// Copyright 2020 Arthur Sonzogni. All rights reserved.
+// Use of this source code is governed by the MIT license that can be found in
+// the LICENSE file.
