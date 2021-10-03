@@ -8,11 +8,11 @@ namespace filters {
     public:
         FilterRotateImg();
 
-        cv::Mat execute(cv::Mat img, CommandCode code) override;
+        cv::Mat execute(cv::Mat img, RotateCode code) override;
 
     private:
         cv::Mat rotate(cv::Mat img, double angle, float cols, float rows);
 
-        std::map<CommandCode, double> mRotation;
+        std::map<RotateCode, double> mRotation;
     };
 }

@@ -4,7 +4,7 @@
 
 namespace filters {
 
-    enum class CommandCode {
+    enum class RotateCode {
         ROTATE_90 = 0,
         ROTATE_180 = 1,
         ROTATE_270 = 2
@@ -14,6 +14,6 @@ namespace filters {
     public:
         virtual ~IFilterCommand() = default;
 
-        virtual cv::Mat execute(cv::Mat img, CommandCode code) = 0;
+        virtual cv::Mat execute(cv::Mat img, RotateCode code) = 0;
     };
 }

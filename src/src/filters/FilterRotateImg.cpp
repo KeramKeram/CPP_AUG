@@ -3,12 +3,12 @@
 namespace filters {
 
     FilterRotateImg::FilterRotateImg() {
-        mRotation[CommandCode::ROTATE_90] = 90;
-        mRotation[CommandCode::ROTATE_180] = 180;
-        mRotation[CommandCode::ROTATE_270] = 270;
+        mRotation[RotateCode::ROTATE_90] = 90;
+        mRotation[RotateCode::ROTATE_180] = 180;
+        mRotation[RotateCode::ROTATE_270] = 270;
     }
 
-    cv::Mat FilterRotateImg::execute(cv::Mat img, CommandCode code) {
+    cv::Mat FilterRotateImg::execute(cv::Mat img, RotateCode code) {
         double angle = mRotation[code];
         // get the center coordinates of the image to create the 2D rotation matrix
         float cols = static_cast<float>(img.cols);
