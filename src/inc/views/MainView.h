@@ -17,6 +17,7 @@
 namespace views {
     class MainView : public IView {
     public:
+        MainView();
 
         void show();
 
