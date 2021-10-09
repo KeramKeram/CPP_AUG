@@ -1,31 +1,65 @@
-#include <functional>  // for function
-#include <iostream>  // for basic_ostream::operator<<, operator<<, endl, basic_ostream, basic_ostream<>::__ostream_type, cout, ostream
-#include <string>    // for string, basic_string, allocator
-#include <vector>    // for vector
+#include <stdlib.h>  // for EXIT_SUCCESS
+#include <memory>    // for allocator, __shared_ptr_access
+#include <string>  // for string, operator+, basic_string, to_string, char_traits
+#include <vector>  // for vector, __alloc_traits<>::value_type
 
-#include "FTXUI/include/ftxui/component/captured_mouse.hpp"      // for ftxui
-#include "FTXUI/include/ftxui/component/component.hpp"           // for Menu
-#include "FTXUI/include/ftxui/component/component_options.hpp"   // for MenuOption
-#include "FTXUI/include/ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
+#include "ftxui/component/captured_mouse.hpp"  // for ftxui
+#include "ftxui/component/component.hpp"  // for Menu, Renderer, Horizontal, Vertical
+#include "ftxui/component/component_base.hpp"  // for ComponentBase
+#include "ftxui/component/screen_interactive.hpp"  // for Component, ScreenInteractive
+#include "ftxui/dom/elements.hpp"  // for text, Element, operator|, window, flex, vbox
+
+using namespace ftxui;
+
+Component Window(std::string title, Component component) {
+    return Renderer(component, [component, title] {  //
+        return window(text(title), component->Render()) | flex;
+    });
+}
 
 int main(int, const char* []) {
-    using namespace ftxui;
-    auto screen = ScreenInteractive::TerminalOutput();
-
-    std::vector<std::string> entries = {
-            "entry 1",
-            "entry 2",
-            "entry 3",
+    int menu_selected[] = {0, 0};
+    std::vector<std::vector<std::string>> menu_entries = {
+            {
+                    "IO"
+            },
+            {
+                    "Rotation"
+            }
     };
-    int selected = 0;
 
-    MenuOption option;
-    option.on_enter = screen.ExitLoopClosure();
-    auto menu = Menu(&entries, &selected, &option);
+    int menu_selected_global = 0;
+    auto menu_global = Container::Vertical(
+            {
+                    Window("General", Menu(&menu_entries[0], &menu_selected[0])),
+                    Window("Augmentation", Menu(&menu_entries[1], &menu_selected[1])),
+            },
+            &menu_selected_global);
 
-    screen.Loop(menu);
+    auto info = Renderer([&] {
+        auto g = static_cast<std::size_t>(menu_selected_global);
+        auto menu_selected_g = static_cast<std::size_t>(menu_selected[g]);
+        std::string value = menu_entries[g][menu_selected_g];
+        return window(text("Content"),  //
+                      vbox({
+                                   text("menu_selected_global = " + std::to_string(g)),
+                                   text("menu_selected[0]     = " +
+                                        std::to_string(menu_selected[0])),
+                                   text("menu_selected[1]     = " +
+                                        std::to_string(menu_selected[1])),
+                                   text("Value                = " + value),
+                           })) |
+               flex;
+    });
 
-    std::cout << "Selected element = " << selected << std::endl;
+    auto global = Container::Horizontal({
+                                                menu_global,
+                                                info,
+                                        });
+
+    auto screen = ScreenInteractive::TerminalOutput();
+    screen.Loop(global);
+    return EXIT_SUCCESS;
 }
 
 // Copyright 2020 Arthur Sonzogni. All rights reserved.
