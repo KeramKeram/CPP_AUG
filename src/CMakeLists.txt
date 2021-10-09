@@ -53,8 +53,14 @@ find_package(spdlog)
 find_package(OpenCV REQUIRED)
 
 include_directories(inc/)
-set(HEADER_FILES inc/io/ILoadImg.h inc/io/LoadOpencvImg.h inc/filters/IFilterCommand.h inc/filters/FilterRotateImg.h)
-set(SOURCE_FILES src/io/LoadOpencvImg.cpp src/filters/FilterRotateImg.cpp)
+set(HEADER_FILES inc/io/ILoadImg.h
+        inc/io/LoadOpencvImg.h
+        inc/filters/IFilterCommand.h
+        inc/filters/FilterRotateImg.h
+        inc/controllers/GuiController.h)
+set(SOURCE_FILES src/io/LoadOpencvImg.cpp
+        src/filters/FilterRotateImg.cpp
+        src/controllers/GuiController.cpp inc/models/IModel.h)
 
 
 # Generic test that uses conan libs
