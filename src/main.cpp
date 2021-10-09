@@ -1,3 +1,10 @@
+/*
+ * Author: KeramKeram
+ * github: https://github.com/KeramKeram/
+ * License: MIT
+ * Short description: Test program for learning FTXUI and opencv in c++. Program will do basic augmentation on image files.
+ */
+
 #include <memory>
 #include <stdlib.h>
 
