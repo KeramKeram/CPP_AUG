@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IFilterCommand.h"
+
 #include <map>
 
 namespace filters {
