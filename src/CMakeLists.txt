@@ -59,12 +59,15 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/filters/FilterRotateImg.h
         inc/controllers/GuiController.h
         inc/models/IModel.h
-        inc/common/CommonEnums.h inc/models/OperationModel.h)
+        inc/common/CommonEnums.h
+        inc/models/OperationModel.h
+        inc/views/MainView.h)
 
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/filters/FilterRotateImg.cpp
         src/controllers/GuiController.cpp
-        src/models/OperationModel.cpp)
+        src/models/OperationModel.cpp
+        src/views/MainView.cpp )
 
 
 # Generic test that uses conan libs
