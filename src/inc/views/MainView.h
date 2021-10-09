@@ -8,10 +8,10 @@
 #include "views/IView.h"
 
 #include <array>
-#include <vector>
-#include <string>
-#include <stdlib.h>  // for EXIT_SUCCESS
 #include <memory>    // for allocator, __shared_ptr_access
+#include <stdlib.h>  // for EXIT_SUCCESS
+#include <string>
+#include <vector>
 
 
 namespace views {
@@ -19,7 +19,7 @@ namespace views {
     public:
         MainView();
 
-        void show();
+        void show() override;
 
     private:
         ftxui::Component Window(std::string title, ftxui::Component component);

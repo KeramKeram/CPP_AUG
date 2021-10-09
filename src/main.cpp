@@ -1,9 +1,7 @@
-#include <stdlib.h>  // for EXIT_SUCCESS
-#include "views/MainView.h"
-
 #include <memory>
+#include <stdlib.h>
 
-
+#include "views/MainView.h"
 
 int main(int, const char* []) {
     auto mainView = std::make_unique<views::MainView>();
@@ -11,6 +9,3 @@ int main(int, const char* []) {
     return EXIT_SUCCESS;
 }
 
-// Copyright 2020 Arthur Sonzogni. All rights reserved.
-// Use of this source code is governed by the MIT license that can be found in
-// the LICENSE file.
