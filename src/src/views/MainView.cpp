@@ -12,6 +12,8 @@ namespace views {
                 }
         };
 
+        mMenuSelectedGlobal = 0;
+
         mGlobalMenu = ftxui::Container::Vertical(
                 {
                         Window("General", ftxui::Menu(&mMenuEntries[0], &mMenuSelected[0])),
