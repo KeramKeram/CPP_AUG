@@ -67,7 +67,7 @@ set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/filters/FilterRotateImg.cpp
         src/controllers/GuiController.cpp
         src/models/OperationModel.cpp
-        src/views/MainView.cpp )
+        src/views/MainView.cpp inc/views/IView.h)
 
 
 # Generic test that uses conan libs
