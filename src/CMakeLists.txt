@@ -57,10 +57,14 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/io/LoadOpencvImg.h
         inc/filters/IFilterCommand.h
         inc/filters/FilterRotateImg.h
-        inc/controllers/GuiController.h)
+        inc/controllers/GuiController.h
+        inc/models/IModel.h
+        inc/common/CommonEnums.h)
+
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/filters/FilterRotateImg.cpp
-        src/controllers/GuiController.cpp inc/models/IModel.h)
+        src/controllers/GuiController.cpp
+        )
 
 
 # Generic test that uses conan libs
