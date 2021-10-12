@@ -22,11 +22,16 @@ namespace views {
         void show() override;
 
     private:
-        ftxui::Component Window(std::string title, ftxui::Component component);
+        ftxui::Component Wrap(std::string name, ftxui::Component component);
+        ftxui::Component createRadioBox(std::string& name, int &selected, std::vector<std::string>& entries);
 
-        std::array<int, 2> mMenuSelected{0, 0};
-        std::vector<std::vector<std::string>> mMenuEntries;
-        int mMenuSelectedGlobal;
-        ftxui::Component mGlobalMenu;
+        std::string mPathInput;
+        std::string mRotationName;
+        std::string mInputPathName;
+
+        ftxui::Component createPathInput(std::string& name);
+
+
+        ftxui::Component initRenderer(ftxui::Component &input, ftxui::Component &radiobox) const;
     };
 }

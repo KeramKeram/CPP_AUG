@@ -3,54 +3,65 @@
 namespace views {
 
     MainView::MainView() {
-        mMenuEntries = {
-                {
-                        "IO"
-                },
-                {
-                        "Rotation"
-                }
-        };
-
-        mMenuSelectedGlobal = 0;
-
-        mGlobalMenu = ftxui::Container::Vertical(
-                {
-                        Window("General", ftxui::Menu(&mMenuEntries[0], &mMenuSelected[0])),
-                        Window("Augmentation", ftxui::Menu(&mMenuEntries[1], &mMenuSelected[1])),
-                },
-                &mMenuSelectedGlobal);
     }
 
     void MainView::show() {
-        auto info = ftxui::Renderer([this] {
-            auto selectedGlobalSize_t = static_cast<std::size_t>(mMenuSelectedGlobal);
-            auto menuSelectedSize_t = static_cast<std::size_t>(mMenuSelected[selectedGlobalSize_t]);
-            std::string value = mMenuEntries[selectedGlobalSize_t][menuSelectedSize_t];
-            return window(ftxui::text("Content"),  //
-                          ftxui::vbox({
-                                              ftxui::text(
-                                                      "menu_selected_global = " + std::to_string(mMenuSelectedGlobal)),
-                                              ftxui::text("menu_selected[0]     = " +
-                                                          std::to_string(mMenuSelected[0])),
-                                              ftxui::text("menu_selected[1]     = " +
-                                                          std::to_string(mMenuSelected[1])),
-                                              ftxui::text("Value                = " + value),
-                                      })) |
-                   ftxui::flex;
-        });
+        auto screen = ftxui::ScreenInteractive::FitComponent();
+        mInputPathName = "Path";
+        ftxui::Component input = createPathInput(mInputPathName);
 
-        auto global = ftxui::Container::Horizontal({
-                                                           mGlobalMenu,
-                                                           info,
-                                                   });
-        auto screen = ftxui::ScreenInteractive::TerminalOutput();
-        screen.Loop(global);
+        std::vector<std::string> radiobox_entries = {
+                "Rotate 90",
+                "Rotate 180",
+                "Rotate 270",
+        };
+        int selected = 0;
+        mRotationName = "Rotation";
+        auto radiobox = createRadioBox(mRotationName, selected, radiobox_entries);
+
+        ftxui::Component component = initRenderer(input, radiobox);
+
+        screen.Loop(component);
     }
 
-    ftxui::Component MainView::Window(std::string title, ftxui::Component component) {
-        return Renderer(component, [component, title] {  //
-            return window(ftxui::text(title), component->Render()) | ftxui::flex;
+    ftxui::Component MainView::initRenderer(ftxui::Component &input, ftxui::Component &radiobox) const {
+        auto layout = ftxui::Container::Vertical({
+                                                         input,
+                                                         radiobox
+                                                 });
+
+        auto component = ftxui::Renderer(layout, [&] {
+            return ftxui::vbox({
+                                       input->Render(),
+                                       ftxui::separator(),
+                                       radiobox->Render(),
+                                       ftxui::separator()
+                               }) |
+                   ftxui::xflex | size(ftxui::WIDTH, ftxui::GREATER_THAN, 40) | ftxui::border;
+        });
+        return component;
+    }
+
+    ftxui::Component MainView::createRadioBox(std::string& name, int &selected, std::vector<std::string>& entries) {
+        auto radiobox = ftxui::Radiobox(&entries, &selected);
+        radiobox = Wrap(name, radiobox);
+        return radiobox;
+    }
+
+    ftxui::Component MainView::createPathInput(std::string& name) {
+        auto input = ftxui::Input(&mPathInput, name);
+        input = Wrap("Input", input);
+        return input;
+    }
+
+    ftxui::Component MainView::Wrap(std::string name, ftxui::Component component) {
+        return Renderer(component, [name, component] {
+            return ftxui::hbox({
+                                       ftxui::text(name) | size(ftxui::WIDTH, ftxui::EQUAL, 8),
+                                       ftxui::separator(),
+                                       component->Render() | ftxui::xflex,
+                               }) |
+                   ftxui::xflex;
         });
     }
 }
