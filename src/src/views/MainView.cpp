@@ -7,13 +7,8 @@ namespace views {
 
     void MainView::show() {
         auto screen = ftxui::ScreenInteractive::FitComponent();
-        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mInputPathString);
 
-        std::vector<std::string> radiobox_entries = {
-                "Rotate 90",
-                "Rotate 180",
-                "Rotate 270",
-        };
+        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mInputPathString);
         auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.selectedRotation,
                                        mMenuData.radioboxEntries);
 
