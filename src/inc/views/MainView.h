@@ -22,16 +22,29 @@ namespace views {
         void show() override;
 
     private:
+
+        struct MainMenuData {
+            // Input Menu
+            std::string mInputPathName{"Path"};
+            std::string mInputPathString;
+            // Rotation Menu
+            std::vector<std::string> radioboxEntries = {
+                    "Rotate 90",
+                    "Rotate 180",
+                    "Rotate 270",
+            };
+            int selectedRotation{0};
+            std::string mRotationMenuName = "Rotation";
+        };
+
         ftxui::Component Wrap(std::string name, ftxui::Component component);
-        ftxui::Component createRadioBox(std::string& name, int &selected, std::vector<std::string>& entries);
 
-        std::string mPathInput;
-        std::string mRotationName;
-        std::string mInputPathName;
+        ftxui::Component createRadioBox(std::string &name, int &selected, std::vector<std::string> &entries);
 
-        ftxui::Component createPathInput(std::string& name);
-
+        ftxui::Component createPathInput(std::string &name, std::string &inputString);
 
         ftxui::Component initRenderer(ftxui::Component &input, ftxui::Component &radiobox) const;
+
+        MainMenuData mMenuData;
     };
 }

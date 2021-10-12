@@ -7,17 +7,15 @@ namespace views {
 
     void MainView::show() {
         auto screen = ftxui::ScreenInteractive::FitComponent();
-        mInputPathName = "Path";
-        ftxui::Component input = createPathInput(mInputPathName);
+        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mInputPathString);
 
         std::vector<std::string> radiobox_entries = {
                 "Rotate 90",
                 "Rotate 180",
                 "Rotate 270",
         };
-        int selected = 0;
-        mRotationName = "Rotation";
-        auto radiobox = createRadioBox(mRotationName, selected, radiobox_entries);
+        auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.selectedRotation,
+                                       mMenuData.radioboxEntries);
 
         ftxui::Component component = initRenderer(input, radiobox);
 
@@ -42,14 +40,14 @@ namespace views {
         return component;
     }
 
-    ftxui::Component MainView::createRadioBox(std::string& name, int &selected, std::vector<std::string>& entries) {
+    ftxui::Component MainView::createRadioBox(std::string &name, int &selected, std::vector<std::string> &entries) {
         auto radiobox = ftxui::Radiobox(&entries, &selected);
         radiobox = Wrap(name, radiobox);
         return radiobox;
     }
 
-    ftxui::Component MainView::createPathInput(std::string& name) {
-        auto input = ftxui::Input(&mPathInput, name);
+    ftxui::Component MainView::createPathInput(std::string &name, std::string &inputString) {
+        auto input = ftxui::Input(&inputString, name);
         input = Wrap("Input", input);
         return input;
     }
