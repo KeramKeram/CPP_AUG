@@ -9,9 +9,11 @@
 #include <stdlib.h>
 
 #include "views/MainView.h"
+#include "controllers/GuiController.h"
 
 int main(int, const char* []) {
-    auto mainView = std::make_unique<views::MainView>();
+    auto guiController = std::make_shared<controllers::GuiController>();
+    auto mainView = std::make_unique<views::MainView>(guiController);
     mainView->show();
     return EXIT_SUCCESS;
 }

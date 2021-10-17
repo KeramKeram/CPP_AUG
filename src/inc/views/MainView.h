@@ -5,7 +5,14 @@
 #include "ftxui/component/component_base.hpp"  // for ComponentBase
 #include "ftxui/component/screen_interactive.hpp"  // for Component, ScreenInteractive
 #include "ftxui/dom/elements.hpp"  // for text, Element, operator|, window, flex, vbox
+#include "ftxui/component/captured_mouse.hpp"  // for ftxui
+#include "ftxui/component/component.hpp"  // for Button, Horizontal, Renderer
+#include "ftxui/component/component_base.hpp"      // for ComponentBase
+#include "ftxui/component/component_options.hpp"   // for ButtonOption
+#include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
+#include "ftxui/dom/elements.hpp"  // for separator, gauge, Element, operator|, vbox, border
 #include "views/IView.h"
+#include "controllers/GuiController.h"
 
 #include <array>
 #include <memory>    // for allocator, __shared_ptr_access
@@ -17,7 +24,7 @@
 namespace views {
     class MainView : public IView {
     public:
-        MainView();
+        MainView(std::shared_ptr<controllers::GuiController> guiController);
 
         void show() override;
 
@@ -43,8 +50,14 @@ namespace views {
 
         ftxui::Component createPathInput(std::string &name, std::string &inputString);
 
-        ftxui::Component initRenderer(ftxui::Component &input, ftxui::Component &radiobox) const;
+        ftxui::Component initRenderer(std::vector<ftxui::Component> &input) const;
+
+        std::shared_ptr<controllers::GuiController> mGuiController;
 
         MainMenuData mMenuData;
+
+        ftxui::ButtonOption mButtonOption;
+
+        ftxui::Component mButtonsLayout;
     };
 }

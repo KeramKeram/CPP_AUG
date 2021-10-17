@@ -13,6 +13,6 @@ namespace controllers {
     }
 
     void GuiController::okButton() {
-
+        std::cout << "Call Ok!";
     }
 }

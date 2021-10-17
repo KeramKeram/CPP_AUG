@@ -2,7 +2,7 @@
 
 namespace views {
 
-    MainView::MainView() {
+    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {
     }
 
     void MainView::show() {
@@ -12,23 +12,31 @@ namespace views {
         auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.selectedRotation,
                                        mMenuData.radioboxEntries);
 
-        ftxui::Component component = initRenderer(input, radiobox);
+        mButtonOption = ftxui::ButtonOption();
+
+        mButtonsLayout = ftxui::Container::Horizontal({
+            Button("[Ok]", [this] {mGuiController->okButton();}, &mButtonOption)});
+
+        std::vector<ftxui::Component> elements = {input, radiobox, mButtonsLayout};
+        ftxui::Component component = initRenderer(elements);
 
         screen.Loop(component);
     }
 
-    ftxui::Component MainView::initRenderer(ftxui::Component &input, ftxui::Component &radiobox) const {
+    ftxui::Component MainView::initRenderer(std::vector<ftxui::Component> &input) const {
         auto layout = ftxui::Container::Vertical({
-                                                         input,
-                                                         radiobox
+                                                         input[0],
+                                                         input[1],
+                                                         input[2]
                                                  });
 
         auto component = ftxui::Renderer(layout, [&] {
             return ftxui::vbox({
-                                       input->Render(),
+                                       input[0]->Render(),
                                        ftxui::separator(),
-                                       radiobox->Render(),
-                                       ftxui::separator()
+                                       input[1]->Render(),
+                                       ftxui::separator(),
+                                       input[2]->Render()
                                }) |
                    ftxui::xflex | size(ftxui::WIDTH, ftxui::GREATER_THAN, 40) | ftxui::border;
         });
