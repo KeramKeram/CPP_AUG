@@ -44,6 +44,8 @@ namespace views {
             std::string mRotationMenuName = "Rotation";
         };
 
+        auto createButtons(std::vector<std::string> &buttonsNames);
+
         ftxui::Component Wrap(std::string name, ftxui::Component component);
 
         ftxui::Component createRadioBox(std::string &name, int &selected, std::vector<std::string> &entries);
@@ -58,6 +60,6 @@ namespace views {
 
         ftxui::ButtonOption mButtonOption;
 
-        ftxui::Component mButtonsLayout;
+
     };
 }

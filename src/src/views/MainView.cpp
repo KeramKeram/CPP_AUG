@@ -4,6 +4,14 @@ namespace views {
 
     MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {
     }
+    auto MainView::createButtons(std::vector<std::string> &buttonsNames) {
+        mButtonOption = ftxui::ButtonOption();
+
+        auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0],
+            [this] { mGuiController->okButton();}, &mButtonOption)});
+
+        return buttonsLayout;
+    }
 
     void MainView::show() {
         auto screen = ftxui::ScreenInteractive::FitComponent();
@@ -12,12 +20,10 @@ namespace views {
         auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.selectedRotation,
                                        mMenuData.radioboxEntries);
 
-        mButtonOption = ftxui::ButtonOption();
+        std::vector<std::string> buttonsNames{"[OK]"};
+        auto buttonLayout = createButtons(buttonsNames);
 
-        mButtonsLayout = ftxui::Container::Horizontal({
-            Button("[Ok]", [this] {mGuiController->okButton();}, &mButtonOption)});
-
-        std::vector<ftxui::Component> elements = {input, radiobox, mButtonsLayout};
+        std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout};
         ftxui::Component component = initRenderer(elements);
 
         screen.Loop(component);
