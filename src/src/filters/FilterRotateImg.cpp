@@ -2,8 +2,12 @@
 
 namespace filters {
 
-    cv::Mat FilterRotateImg::execute(cv::Mat img, RotateCode code) {
-        double angle = toUnderlyingType(code);
+    FilterRotateImg::FilterRotateImg(RotateCode code): mCode(code) {
+
+    }
+
+    cv::Mat FilterRotateImg::execute(cv::Mat img) {
+        double angle = toUnderlyingType(mCode);
         float cols = static_cast<float>(img.cols);
         float rows = static_cast<float>(img.rows);
 

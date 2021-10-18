@@ -10,6 +10,6 @@ namespace filters {
     public:
         virtual ~IFilterCommand() = default;
 
-        virtual cv::Mat execute(cv::Mat img, RotateCode code) = 0;
+        virtual cv::Mat execute(cv::Mat img) = 0;
     };
 }
