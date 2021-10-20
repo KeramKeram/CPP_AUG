@@ -7,9 +7,11 @@
 
 namespace models {
     template<class T>
-    class MOperationModel : public IModel<T> {
+    class OperationModel : public IModel<T> {
     public:
-        ~MOperationModel() override = default;
+        OperationModel() = default;
+
+        ~OperationModel() override = default;
 
         void add(std::shared_ptr<T> ptr) override {
             std::lock_guard<std::mutex> lk(mMutex);
@@ -19,6 +21,10 @@ namespace models {
         bool hasNext() override {
             std::lock_guard<std::mutex> lk(mMutex);
             return mModel.size() > mVectorCounter;
+        }
+
+        void clear() override {
+
         }
 
         std::shared_ptr<T> &next() override {
