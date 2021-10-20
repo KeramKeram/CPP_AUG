@@ -12,10 +12,8 @@ namespace models {
 
         void clear() = 0;
 
-        [[nodiscard]] virtual int size() const = 0;
-
         virtual bool hasNext() const = 0;
 
-        virtual shared_ptr<T>& next() = 0;
+        virtual std::shared_ptr<T>& next() = 0;
     };
 }
