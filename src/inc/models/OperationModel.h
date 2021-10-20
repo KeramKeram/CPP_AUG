@@ -2,7 +2,6 @@
 
 #include "models/IModel.h"
 
-#include <condition_variable>
 #include <mutex>
 #include <vector>
 
@@ -14,21 +13,22 @@ namespace models {
 
         void add(std::shared_ptr<T> ptr) override {
             std::lock_guard<std::mutex> lk(mMutex);
-            mModel.template emplace_back(ptr);
-            mCondVar.notify_one();
+            mModel.emplace_back(ptr);
         }
 
-        bool hasNext() const override {
-            return false;
+        bool hasNext() override {
+            std::lock_guard<std::mutex> lk(mMutex);
+            return mModel.size() > mVectorCounter;
         }
 
         std::shared_ptr<T> &next() override {
-            return nullptr;
+            std::lock_guard<std::mutex> lk(mMutex);
+            return mModel[mVectorCounter++];
         }
 
     private:
         std::vector<std::shared_ptr<T>> mModel;
         std::mutex mMutex;
-        std::condition_variable mCondVar;
+        unsigned int mVectorCounter;
     };
 }
