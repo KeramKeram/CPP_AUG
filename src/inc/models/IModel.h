@@ -12,7 +12,7 @@ namespace models {
 
         virtual void clear() = 0;
 
-        virtual bool hasNext() const = 0;
+        virtual bool hasNext() = 0;
 
         virtual std::shared_ptr<T>& next() = 0;
     };
