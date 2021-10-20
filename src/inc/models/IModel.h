@@ -10,7 +10,7 @@ namespace models {
 
         virtual void add(std::shared_ptr<T>) = 0;
 
-        void clear() = 0;
+        virtual void clear() = 0;
 
         virtual bool hasNext() const = 0;
 
