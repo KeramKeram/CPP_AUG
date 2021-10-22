@@ -31,7 +31,7 @@ namespace models {
 
         std::shared_ptr<T> &next() override {
             std::lock_guard<std::mutex> lk(mMutex);
-            return mModel[mVectorCounter++];
+            return mModel.at(mVectorCounter++);
         }
 
     private:
