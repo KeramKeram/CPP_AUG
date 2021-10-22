@@ -9,7 +9,9 @@ namespace views {
 
         auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0],
         [this] {
-                    mGuiController->okButton(mMenuData.mData);}, &mButtonOption)});
+                    mGuiController->clearModel();
+                    mGuiController->updateModel(mMenuData.mData);
+                    mGuiController->okButton();}, &mButtonOption)});
 
         return buttonsLayout;
     }

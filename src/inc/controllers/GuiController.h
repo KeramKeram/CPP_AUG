@@ -8,10 +8,10 @@
 namespace controllers {
     class GuiController {
     public:
-        void setRotation(RotateCode code, int percent);
+        void updateModel(AugumentationData data);
 
-        void setPathToImages(std::string path);
+        void clearModel();
 
-        void okButton(AugumentationData data);
+        void okButton();
     };
 }
