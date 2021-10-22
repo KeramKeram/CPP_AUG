@@ -16,3 +16,9 @@ TEST_CASE("Models with data", "[operationsmodel]")
         REQUIRE(model.hasNext() == true);
     }
 }
+
+TEST_CASE("Models with no items", "[operationsmodel]")
+{
+    models::OperationModel<int> model;
+    REQUIRE(model.hasNext() == false);
+}
