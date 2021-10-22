@@ -12,7 +12,7 @@ namespace controllers {
         std::cout << path;
     }
 
-    void GuiController::okButton() {
-        std::cout << "Call Ok!";
+    void GuiController::okButton(AugumentationData data) {
+        std::cout << "Call Ok!" << data.selectedRotation;
     }
 }

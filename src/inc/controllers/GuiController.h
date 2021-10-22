@@ -1,6 +1,7 @@
 #pragma once
 
 #include "common/CommonEnums.h"
+#include "common/CommonStructs.h"
 
 #include <string>
 
@@ -11,6 +12,6 @@ namespace controllers {
 
         void setPathToImages(std::string path);
 
-        void okButton();
+        void okButton(AugumentationData data);
     };
 }

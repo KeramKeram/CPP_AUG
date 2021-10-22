@@ -1,19 +1,19 @@
 #pragma once
 
+#include "common/CommonStructs.h"
+#include "controllers/GuiController.h"
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
-#include "ftxui/component/component.hpp"  // for Menu, Renderer, Horizontal, Vertical
-#include "ftxui/component/component_base.hpp"  // for ComponentBase
-#include "ftxui/component/screen_interactive.hpp"  // for Component, ScreenInteractive
-#include "ftxui/dom/elements.hpp"  // for text, Element, operator|, window, flex, vbox
 #include "ftxui/component/captured_mouse.hpp"  // for ftxui
 #include "ftxui/component/component.hpp"  // for Button, Horizontal, Renderer
+#include "ftxui/component/component.hpp"  // for Menu, Renderer, Horizontal, Vertical
 #include "ftxui/component/component_base.hpp"      // for ComponentBase
+#include "ftxui/component/component_base.hpp"  // for ComponentBase
 #include "ftxui/component/component_options.hpp"   // for ButtonOption
+#include "ftxui/component/screen_interactive.hpp"  // for Component, ScreenInteractive
 #include "ftxui/component/screen_interactive.hpp"  // for ScreenInteractive
 #include "ftxui/dom/elements.hpp"  // for separator, gauge, Element, operator|, vbox, border
+#include "ftxui/dom/elements.hpp"  // for text, Element, operator|, window, flex, vbox
 #include "views/IView.h"
-#include "controllers/GuiController.h"
-#include "common/CommonStructs.h"
 
 #include <array>
 #include <memory>    // for allocator, __shared_ptr_access
