@@ -37,6 +37,6 @@ namespace models {
     private:
         std::vector<std::shared_ptr<T>> mModel;
         std::mutex mMutex;
-        unsigned int mVectorCounter;
+        unsigned int mVectorCounter{0};
     };
 }
