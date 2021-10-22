@@ -24,7 +24,9 @@ namespace models {
         }
 
         void clear() override {
-
+            std::lock_guard<std::mutex> lk(mMutex);
+            mModel.clear();
+            mVectorCounter = 0;
         }
 
         std::shared_ptr<T> &next() override {
