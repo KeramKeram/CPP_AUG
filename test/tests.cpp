@@ -20,5 +20,12 @@ TEST_CASE("Models with data", "[operationsmodel]")
 TEST_CASE("Models with no items", "[operationsmodel]")
 {
     models::OperationModel<int> model;
-    REQUIRE(model.hasNext() == false);
+
+    SECTION("Test for no next element.") {
+        REQUIRE(model.hasNext() == false);
+    }
+
+    SECTION("Test for access not existing item.") {
+        REQUIRE_THROWS(model.next());
+    }
 }
