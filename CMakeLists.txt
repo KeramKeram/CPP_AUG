@@ -68,6 +68,7 @@ endif()
 
 if(ENABLE_TESTING)
   enable_testing()
+  set(APPLICATION_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
   message("Building Tests. Be sure to check out test/constexpr_tests for constexpr testing")
   add_subdirectory(test)
 endif()
