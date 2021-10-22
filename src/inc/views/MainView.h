@@ -22,6 +22,12 @@
 
 
 namespace views {
+
+    struct AugumentationData {
+        int selectedRotation{0};
+        std::string mInputPathString;
+    };
+
     class MainView : public IView {
     public:
         MainView(std::shared_ptr<controllers::GuiController> guiController);
@@ -31,16 +37,16 @@ namespace views {
     private:
 
         struct MainMenuData {
+            // OutputData
+            AugumentationData mData;
             // Input Menu
             std::string mInputPathName{"Path"};
-            std::string mInputPathString;
             // Rotation Menu
             std::vector<std::string> radioboxEntries = {
                     "Rotate 90",
                     "Rotate 180",
                     "Rotate 270",
             };
-            int selectedRotation{0};
             std::string mRotationMenuName = "Rotation";
         };
 
