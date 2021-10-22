@@ -13,6 +13,7 @@
 #include "ftxui/dom/elements.hpp"  // for separator, gauge, Element, operator|, vbox, border
 #include "views/IView.h"
 #include "controllers/GuiController.h"
+#include "common/CommonStructs.h"
 
 #include <array>
 #include <memory>    // for allocator, __shared_ptr_access
@@ -22,11 +23,6 @@
 
 
 namespace views {
-
-    struct AugumentationData {
-        int selectedRotation{0};
-        std::string mInputPathString;
-    };
 
     class MainView : public IView {
     public:
