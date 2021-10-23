@@ -65,7 +65,7 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/common/CommonStructs.h
         inc/factories/IFilterFactory.h
         inc/views/IView.h
-        inc/factories/FilterFactory.h)
+        inc/factories/RotationFilterFactory.h)
 
 
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
@@ -73,7 +73,7 @@ set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/controllers/GuiController.cpp
         src/models/OperationModel.cpp
         src/views/MainView.cpp
-        src/factories/FilterFactory.cpp)
+        src/factories/RotationFilterFactory.cpp)
 
 
 # Generic test that uses conan libs
