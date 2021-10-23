@@ -8,6 +8,8 @@
 namespace factories {
     class RotationFilterFactory : public factories::IFilterFactory {
     public:
+        RotationFilterFactory();
+
         ~RotationFilterFactory() override = default;
 
         std::shared_ptr<filters::IFilterCommand> createFilter(AugumentationData &data) override;
