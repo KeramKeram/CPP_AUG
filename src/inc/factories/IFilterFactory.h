@@ -8,7 +8,7 @@ namespace factories {
     public:
         virtual ~IFilterFactory() = default;
 
-        std::shared_ptr<filters::IFilterCommand> createFilter(AugumentationData &data);
+        virtual std::shared_ptr<filters::IFilterCommand> createFilter(AugumentationData &data) = 0;
 
     };
 }
