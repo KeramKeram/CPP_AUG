@@ -61,7 +61,7 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/models/IModel.h
         inc/common/CommonEnums.h
         inc/models/OperationModel.h
-        inc/views/MainView.h inc/common/CommonStructs.h)
+        inc/views/MainView.h inc/common/CommonStructs.h inc/factories/IFactory.h)
 
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/filters/FilterRotateImg.cpp
