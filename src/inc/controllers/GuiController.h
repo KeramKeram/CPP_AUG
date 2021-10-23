@@ -10,6 +10,8 @@
 namespace controllers {
     class GuiController {
     public:
+        GuiController();
+
         void updateModel(AugumentationData data);
 
         void clearModel();

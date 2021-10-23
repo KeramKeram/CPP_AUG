@@ -7,8 +7,7 @@ namespace controllers {
 
     void GuiController::updateModel(AugumentationData data) {
         auto factory = std::make_unique<factories::RotationFilterFactory>();
-        auto rotationItem = factory->createFilter(data);
-        std::cout << "Call Ok Update!" << data.selectedRotation;
+        mModel->add(factory->createFilter(data));
     }
 
     void GuiController::clearModel() {
@@ -17,5 +16,9 @@ namespace controllers {
 
     void GuiController::okButton() {
         std::cout << "Call Ok!";
+    }
+
+    GuiController::GuiController() {
+        mModel = std::make_unique<models::OperationModel<filters::IFilterCommand>>();
     }
 }
