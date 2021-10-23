@@ -2,6 +2,8 @@
 
 #include "common/CommonEnums.h"
 #include "common/CommonStructs.h"
+#include "models/OperationModel.h"
+#include "filters/IFilterCommand.h"
 
 #include <string>
 
@@ -13,5 +15,8 @@ namespace controllers {
         void clearModel();
 
         void okButton();
+
+    private:
+        std::unique_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
     };
 }
