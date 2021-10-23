@@ -4,9 +4,9 @@
 #include "filters/IFilterCommand.h"
 
 namespace factories {
-    class IFactory {
+    class IFilterFactory {
     public:
-        virtual ~IFactory() = default;
+        virtual ~IFilterFactory() = default;
 
         std::shared_ptr<filters::IFilterCommand> createFilter(AugumentationData &data);
 
