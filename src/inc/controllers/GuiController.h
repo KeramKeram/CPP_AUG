@@ -2,8 +2,8 @@
 
 #include "common/CommonEnums.h"
 #include "common/CommonStructs.h"
-#include "models/OperationModel.h"
 #include "filters/IFilterCommand.h"
+#include "models/OperationModel.h"
 
 #include <string>
 
