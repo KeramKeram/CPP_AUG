@@ -1,7 +1,7 @@
 #include "controllers/GuiController.h"
 #include "factories/RotationFilterFactory.h"
+#include "spdlog/spdlog.h"
 
-#include <iostream>
 
 namespace controllers {
 
@@ -19,7 +19,7 @@ namespace controllers {
     }
 
     void GuiController::okButton() {
-        std::cout << "Call Ok!";
+        spdlog::info("call ok");
     }
 
     GuiController::GuiController() {
