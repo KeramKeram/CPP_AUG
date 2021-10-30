@@ -10,6 +10,10 @@ namespace controllers {
         mModel->add(factory->createFilter(data));
     }
 
+    void GuiController::setPathToImages(const std::string &path) {
+        GuiController::mPathImages = path;
+    }
+
     void GuiController::clearModel() {
         mModel->clear();
     }

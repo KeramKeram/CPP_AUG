@@ -20,5 +20,9 @@ namespace controllers {
 
     private:
         std::unique_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
+
+        std::string mPathImages;
+    public:
+        void setPathToImages(const std::string &path);
     };
 }
