@@ -35,6 +35,7 @@ namespace views {
         struct MainMenuData {
             // OutputData
             AugumentationData mData;
+            IOData mIO;
             // Input Menu
             std::string mInputPathName{"Path"};
             // Rotation Menu

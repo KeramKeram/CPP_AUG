@@ -19,7 +19,7 @@ namespace views {
     void MainView::show() {
         auto screen = ftxui::ScreenInteractive::FitComponent();
 
-        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mData.mInputPathString);
+        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mIO.mInputPathString);
         auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.mData.selectedRotation,
                                        mMenuData.radioboxEntries);
 
