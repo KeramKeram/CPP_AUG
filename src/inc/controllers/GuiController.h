@@ -12,7 +12,7 @@ namespace controllers {
     public:
         GuiController();
 
-        void CreateFilters(AugumentationData data);
+        void createFilters(AugumentationData data);
 
         void clearModel();
 
