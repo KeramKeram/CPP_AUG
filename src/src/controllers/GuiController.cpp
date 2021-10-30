@@ -11,7 +11,7 @@ namespace controllers {
     }
 
     void GuiController::clearModel() {
-        std::cout << "Call Ok Clear!";
+        mModel->clear();
     }
 
     void GuiController::okButton() {
