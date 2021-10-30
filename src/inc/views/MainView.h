@@ -47,7 +47,7 @@ namespace views {
             std::string mRotationMenuName = "Rotation";
         };
 
-        auto createButtons(std::vector<std::string> &buttonsNames);
+        auto createButtons(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback);
 
         ftxui::Component Wrap(std::string name, ftxui::Component component);
 

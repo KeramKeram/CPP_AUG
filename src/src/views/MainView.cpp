@@ -4,15 +4,11 @@ namespace views {
 
     MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {
     }
-    auto MainView::createButtons(std::vector<std::string> &buttonsNames) {
+    auto MainView::createButtons(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
         mButtonOption = ftxui::ButtonOption();
 
         auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0],
-        [this] {
-                    mGuiController->clearModel();
-                    mGuiController->createFilters(mMenuData.mData);
-                    mGuiController->setPathToImages(mMenuData.mInputPathName);
-                    mGuiController->okButton();}, &mButtonOption)});
+          clickCallback, &mButtonOption)});
 
         return buttonsLayout;
     }
@@ -25,7 +21,12 @@ namespace views {
                                        mMenuData.radioboxEntries);
 
         std::vector<std::string> buttonsNames{"[OK]"};
-        auto buttonLayout = createButtons(buttonsNames);
+        std::function<void()> clickCallback = [this] {
+            mGuiController->clearModel();
+            mGuiController->createFilters(mMenuData.mData);
+            mGuiController->setPathToImages(mMenuData.mInputPathName);
+            mGuiController->okButton();};
+        auto buttonLayout = createButtons(buttonsNames, clickCallback);
 
         std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout};
         ftxui::Component component = initRenderer(elements);
