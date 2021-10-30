@@ -5,7 +5,7 @@
 
 namespace controllers {
 
-    void GuiController::updateModel(AugumentationData data) {
+    void GuiController::CreateFilters(AugumentationData data) {
         auto factory = std::make_unique<factories::RotationFilterFactory>();
         mModel->add(factory->createFilter(data));
     }
