@@ -66,7 +66,7 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/factories/IFilterFactory.h
         inc/views/IView.h
         inc/factories/RotationFilterFactory.h
-        inc/io/DirectoryFileFilter.h)
+        inc/io/Directory.h)
 
 
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
@@ -75,7 +75,7 @@ set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/models/OperationModel.cpp
         src/views/MainView.cpp
         src/factories/RotationFilterFactory.cpp
-        src/io/DirectoryFileFilter.cpp)
+        src/io/Directory.cpp)
 
 
 # Generic test that uses conan libs
