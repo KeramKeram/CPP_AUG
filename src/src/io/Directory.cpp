@@ -1,8 +1,8 @@
 #include "io/Directory.h"
 #include "spdlog/spdlog.h"
 
+#include <algorithm>
 #include <filesystem>
-#include <sstream>
 
 namespace io {
 
