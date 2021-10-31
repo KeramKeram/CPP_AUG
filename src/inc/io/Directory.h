@@ -7,7 +7,7 @@
 namespace io {
     class Directory {
     public:
-        std::vector<std::string> loadFileListByExtension(std::string &pathToDir, std::string &extension);
+        std::vector<std::string> loadFilesList(std::string &pathToDir);
 
     };
 }
