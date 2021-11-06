@@ -1,8 +1,7 @@
-#include <catch2/catch.hpp>
 #include "io/DirectoryFilter.h"
+#include <catch2/catch.hpp>
 
-TEST_CASE("Filtering empty files list", "[io]")
-{
+TEST_CASE("Filtering empty files list", "[io]") {
     io::DirectoryFilter filter;
     std::vector<std::string> emptyVector;
     SECTION("Test filtering by extension empty list, return list need to be empty.") {
@@ -10,8 +9,7 @@ TEST_CASE("Filtering empty files list", "[io]")
     }
 }
 
-TEST_CASE("Filtering list by one extension", "[io]")
-{
+TEST_CASE("Filtering list by one extension", "[io]") {
     io::DirectoryFilter filter;
     std::vector<std::string> files = {"main.cpp", "main.h", "foo.c", "foo.hpp", "readme.txt"};
 
@@ -41,8 +39,7 @@ TEST_CASE("Filtering list by one extension", "[io]")
     }
 }
 
-TEST_CASE("Filtering files list by not existing extension in set", "[io]")
-{
+TEST_CASE("Filtering files list by not existing extension in set", "[io]") {
     io::DirectoryFilter filter;
     std::vector<std::string> files = {"main.cpp", "main.h", "foo.c", "foo.hpp", "readme.txt"};
 
