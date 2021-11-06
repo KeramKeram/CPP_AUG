@@ -7,7 +7,12 @@ add_library(catch_main STATIC catch_main.cpp)
 target_link_libraries(catch_main PUBLIC Catch2::Catch2)
 target_link_libraries(catch_main PRIVATE project_options)
 include_directories(${APPLICATION_SOURCE_DIR}/src/inc)
-add_executable(tests tests.cpp ${APPLICATION_SOURCE_DIR}/src/src/models/OperationModel.cpp)
+
+set(SOURCE_FILES_SRC ${APPLICATION_SOURCE_DIR}/src/src/models/OperationModel.cpp
+        ${APPLICATION_SOURCE_DIR}/src/src/io/DirectoryFilter.cpp
+)
+
+add_executable(tests tests.cpp DirectoryFilterTests.cpp ${SOURCE_FILES_SRC})
 target_link_libraries(tests PRIVATE project_warnings project_options catch_main)
 
 # automatically discover tests that are defined in catch based test files you can modify the unittests. Set TEST_PREFIX
