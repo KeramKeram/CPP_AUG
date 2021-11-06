@@ -48,3 +48,14 @@ TEST_CASE("Filtering files list by not existing extension in set", "[io]") {
         REQUIRE(filter.filterByExtension(files, extensions).size() == 0);
     }
 }
+
+TEST_CASE("Filtering list by two extension", "[io]") {
+    io::DirectoryFilter filter;
+    std::vector<std::string> files = {"main.cpp", "main.h", "foo.c", "foo.hpp", "readme.txt"};
+
+    SECTION("Test filtering by cpp and h extension") {
+        std::vector<std::string> extensions = {".cpp", ".h"};
+        REQUIRE(filter.filterByExtension(files, extensions).size() == 2);
+    }
+
+}
