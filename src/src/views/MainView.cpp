@@ -24,7 +24,7 @@ namespace views {
         std::function<void()> clickCallback = [this] {
             mGuiController->clearModel();
             mGuiController->createFilters(mMenuData.mData);
-            mGuiController->setPathToImages(mMenuData.mInputPathName);
+            mGuiController->setPathToImages(mMenuData.mIO.mInputPathString);
             mGuiController->okButton();};
         auto buttonLayout = createButtons(buttonsNames, clickCallback);
 
