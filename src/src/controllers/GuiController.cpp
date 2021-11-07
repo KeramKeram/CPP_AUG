@@ -1,7 +1,5 @@
 #include "controllers/GuiController.h"
 #include "factories/RotationFilterFactory.h"
-#include "io/Directory.h"
-#include "io/DirectoryFilter.h"
 #include "spdlog/spdlog.h"
 
 namespace controllers {
@@ -21,8 +19,6 @@ namespace controllers {
     }
 
     void GuiController::okButton() {
-        auto files = io::Directory::loadFilesList(mPathImages);
-        files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
         spdlog::info("call ok");
     }
 
