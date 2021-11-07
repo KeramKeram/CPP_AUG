@@ -2,5 +2,7 @@
 
 namespace controllers {
 
-    AugumentationFacade::AugumentationFacade(const std::string &imgPath) : mImagesPath(imgPath) {}
+    AugumentationFacade::AugumentationFacade(
+            const std::string &imgPath, std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel)
+        : mImagesPath(imgPath), mModel(filterModel) {}
 }// namespace controllers
