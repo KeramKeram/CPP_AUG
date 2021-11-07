@@ -2,4 +2,5 @@
 
 namespace controllers {
 
-}
+    AugumentationFacade::AugumentationFacade(const std::string &imgPath) : mImagesPath(imgPath) {}
+}// namespace controllers
