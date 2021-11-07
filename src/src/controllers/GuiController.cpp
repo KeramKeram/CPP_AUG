@@ -4,7 +4,6 @@
 #include "io/DirectoryFilter.h"
 #include "spdlog/spdlog.h"
 
-#include <iostream>
 namespace controllers {
 
     void GuiController::createFilters(AugumentationData data) {
