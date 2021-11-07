@@ -10,6 +10,7 @@ namespace controllers {
     public:
         AugumentationFacade(const std::string &imgPath,
                             std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel);
+        void runAugmentation();
 
     private:
         std::string mImagesPath;
