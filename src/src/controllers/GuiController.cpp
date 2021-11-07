@@ -8,6 +8,7 @@
 namespace controllers {
 
     void GuiController::createFilters(AugumentationData data) {
+        mModel = std::make_shared<models::OperationModel<filters::IFilterCommand>>();
         auto factory = std::make_unique<factories::RotationFilterFactory>();
         mModel->add(factory->createFilter(data));
     }

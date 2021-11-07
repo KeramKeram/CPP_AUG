@@ -19,7 +19,7 @@ namespace controllers {
         void okButton();
 
     private:
-        std::unique_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
+        std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
 
         std::string mPathImages;
     public:
