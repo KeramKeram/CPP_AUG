@@ -35,10 +35,6 @@ namespace views {
     private:
 
         struct MainMenuData {
-            // OutputData
-            AugumentationData mData;
-            IOData mIO;
-            // Input Menu
             std::string mInputPathName{"Path"};
             // Rotation Menu
             std::vector<std::string> radioboxEntries = {
@@ -65,6 +61,8 @@ namespace views {
 
         ftxui::ButtonOption mButtonOption;
 
+        AugumentationData mData;
 
+        IOData mIO;
     };
 }

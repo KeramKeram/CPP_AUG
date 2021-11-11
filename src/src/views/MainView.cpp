@@ -6,7 +6,7 @@ namespace views {
 
     MainView::MainView(std::shared_ptr<controllers::GuiController> guiController, std::string path)
         : mGuiController(guiController) {
-        mMenuData.mIO.mInputPathString = path;
+        mIO.mInputPathString = path;
     }
 
     auto MainView::createButtons(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
@@ -21,15 +21,15 @@ namespace views {
     void MainView::show() {
         auto screen = ftxui::ScreenInteractive::FitComponent();
 
-        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mMenuData.mIO.mInputPathString);
-        auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mMenuData.mData.selectedRotation,
+        ftxui::Component input = createPathInput(mMenuData.mInputPathName, mIO.mInputPathString);
+        auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mData.selectedRotation,
                                        mMenuData.radioboxEntries);
 
         std::vector<std::string> buttonsNames{"[OK]"};
         std::function<void()> clickCallback = [this] {
             mGuiController->clearModel();
-            mGuiController->createFilters(mMenuData.mData);
-            mGuiController->setPathToImages(mMenuData.mIO.mInputPathString);
+            mGuiController->createFilters(mData);
+            mGuiController->setPathToImages(mIO.mInputPathString);
             mGuiController->okButton();};
         auto buttonLayout = createButtons(buttonsNames, clickCallback);
 
