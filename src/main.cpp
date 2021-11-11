@@ -13,9 +13,21 @@
 #include <stdlib.h>
 
 
-int main(int, const char* []) {
+std::unique_ptr<views::MainView> createMainView(int arg, std::shared_ptr<controllers::GuiController> gController,
+                                                const char *argv[]) {
+    std::unique_ptr<views::MainView> ptr = nullptr;
+    if (arg == 2) {
+        std::string path(argv[1]);
+        ptr = std::make_unique<views::MainView>(gController, path);
+        return ptr;
+    }
+    ptr = std::make_unique<views::MainView>(gController);
+    return ptr;
+}
+
+int main(int argc, const char *argv[]) {
     auto guiController = std::make_shared<controllers::GuiController>();
-    auto mainView = std::make_unique<views::MainView>(guiController);
+    auto mainView = createMainView(argc, guiController, argv);
     size_t max_size = 1048576 * 5;
     size_t max_files = 1;
     auto logger = spdlog::rotating_logger_mt("AugumentatorLog", "AugumentatorLog.txt", max_size, max_files);
@@ -24,4 +36,3 @@ int main(int, const char* []) {
     mainView->show();
     return EXIT_SUCCESS;
 }
-

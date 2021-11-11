@@ -28,6 +28,8 @@ namespace views {
     public:
         MainView(std::shared_ptr<controllers::GuiController> guiController);
 
+        MainView(std::shared_ptr<controllers::GuiController> guiController, std::string path);
+
         void show() override;
 
     private:

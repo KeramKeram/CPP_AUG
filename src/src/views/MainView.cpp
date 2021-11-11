@@ -2,8 +2,13 @@
 
 namespace views {
 
-    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {
+    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {}
+
+    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController, std::string path)
+        : mGuiController(guiController) {
+        mMenuData.mIO.mInputPathString = path;
     }
+
     auto MainView::createButtons(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
         mButtonOption = ftxui::ButtonOption();
 
