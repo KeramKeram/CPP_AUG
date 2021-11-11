@@ -34,6 +34,11 @@ namespace models {
             return mModel.at(mVectorCounter++);
         }
 
+        void resetIterator() override {
+            std::lock_guard<std::mutex> lk(mMutex);
+            mVectorCounter = 0;
+        }
+
     private:
         std::vector<std::shared_ptr<T>> mModel;
         std::mutex mMutex;

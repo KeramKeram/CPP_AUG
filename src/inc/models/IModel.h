@@ -15,5 +15,7 @@ namespace models {
         virtual bool hasNext() = 0;
 
         virtual std::shared_ptr<T>& next() = 0;
+
+        virtual void resetIterator() = 0;
     };
 }
