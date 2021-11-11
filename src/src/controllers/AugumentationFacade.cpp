@@ -19,8 +19,8 @@ namespace controllers {
             auto img = loader.loadImage(path);
             while(mModel->hasNext()) {
                 auto filter = mModel->next();
-                filter->execute(img);
-                saver.saveImageOCV(img, path + "_1");
+                auto augumentImg = filter->execute(img);
+                saver.saveImageOCV(augumentImg, path + "_1");
             }
         }
     }
