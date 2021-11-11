@@ -1,6 +1,7 @@
 #include "controllers/AugumentationFacade.h"
 #include "io/Directory.h"
 #include "io/DirectoryFilter.h"
+#include "io/LoadOpencvImg.h"
 
 namespace controllers {
 
@@ -11,5 +12,10 @@ namespace controllers {
     void AugumentationFacade::runAugmentation() {
         auto files = io::Directory::loadFilesList(mImagesPath);
         files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
+        io::LoadOpencvImg loader;
+        for (const auto& path: files) {
+            auto img = loader.loadImage(path);
+
+        }
     }
 }// namespace controllers
