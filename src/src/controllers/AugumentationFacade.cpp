@@ -3,7 +3,6 @@
 #include "io/DirectoryFilter.h"
 #include "io/LoadOpencvImg.h"
 #include "io/SaveOpencvImg.h"
-#include "spdlog/spdlog.h"
 
 
 namespace controllers {
@@ -18,7 +17,6 @@ namespace controllers {
         io::LoadOpencvImg loader;
         io::SaveImage saver;
         for (const auto& path: files) {
-            spdlog::warn(path);
             auto img = loader.loadImage(path);
 
             while(mModel->hasNext()) {
