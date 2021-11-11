@@ -15,7 +15,10 @@ namespace controllers {
         io::LoadOpencvImg loader;
         for (const auto& path: files) {
             auto img = loader.loadImage(path);
-
+            while(mModel->hasNext()) {
+                auto filter = mModel->next();
+                filter->execute(img);
+            }
         }
     }
 }// namespace controllers
