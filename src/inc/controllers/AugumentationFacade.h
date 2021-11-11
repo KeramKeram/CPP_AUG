@@ -3,6 +3,8 @@
 #include "filters/IFilterCommand.h"
 #include "models/OperationModel.h"
 
+#include <io/LoadOpencvImg.h>
+#include <io/SaveOpencvImg.h>
 #include <string>
 
 namespace controllers {
@@ -15,5 +17,6 @@ namespace controllers {
     private:
         std::string mImagesPath;
         std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
+        void augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path);
     };
 }// namespace controllers

@@ -16,15 +16,15 @@ namespace controllers {
         files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
         io::LoadOpencvImg loader;
         io::SaveImage saver;
-        for (const auto& path: files) {
-            auto img = loader.loadImage(path);
-
-            while(mModel->hasNext()) {
-                auto filter = mModel->next();
-                auto augumentImg = filter->execute(img);
-                saver.saveImageOCV(augumentImg, path + "_1");
-            }
-            mModel->resetIterator();
+        for (const auto &path : files) { augumentImages(loader, saver, path); }
+    }
+    void AugumentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
+        auto img = loader.loadImage(path);
+        while (mModel->hasNext()) {
+            auto filter = mModel->next();
+            auto augumentImg = filter->execute(img);
+            saver.saveImageOCV(augumentImg, path + "_1");
         }
+        mModel->resetIterator();
     }
 }// namespace controllers
