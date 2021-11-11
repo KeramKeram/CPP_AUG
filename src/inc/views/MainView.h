@@ -34,7 +34,7 @@ namespace views {
 
     private:
 
-        struct MainMenuData {
+        struct MainMenuStaticData {
             std::string mInputPathName{"Path"};
             // Rotation Menu
             std::vector<std::string> radioboxEntries = {
@@ -57,7 +57,7 @@ namespace views {
 
         std::shared_ptr<controllers::GuiController> mGuiController;
 
-        MainMenuData mMenuData;
+        MainMenuStaticData mMenuData;
 
         ftxui::ButtonOption mButtonOption;
 
