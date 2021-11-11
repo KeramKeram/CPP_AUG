@@ -2,6 +2,7 @@
 #include "io/Directory.h"
 #include "io/DirectoryFilter.h"
 #include "io/LoadOpencvImg.h"
+#include "io/SaveOpencvImg.h"
 
 namespace controllers {
 
@@ -13,11 +14,13 @@ namespace controllers {
         auto files = io::Directory::loadFilesList(mImagesPath);
         files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
         io::LoadOpencvImg loader;
+        io::SaveImage saver;
         for (const auto& path: files) {
             auto img = loader.loadImage(path);
             while(mModel->hasNext()) {
                 auto filter = mModel->next();
                 filter->execute(img);
+                saver.saveImageOCV(img, path + "_1");
             }
         }
     }
