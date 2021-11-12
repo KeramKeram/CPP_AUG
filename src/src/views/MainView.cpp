@@ -12,8 +12,7 @@ namespace views {
     auto MainView::createButton(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
         mButtonOption = ftxui::ButtonOption();
 
-        auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0],
-          clickCallback, &mButtonOption)});
+        auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0], clickCallback, &mButtonOption)});
 
         return buttonsLayout;
     }
@@ -22,15 +21,17 @@ namespace views {
         auto screen = ftxui::ScreenInteractive::FitComponent();
 
         ftxui::Component input = createPathInput(mMenuData.mInputPathName, mIO.mInputPathString);
-        auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mData.selectedRotation,
-                                       mMenuData.radioboxEntries);
+        auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mData.selectedRotation, mMenuData.radioboxEntries);
 
         std::vector<std::string> buttonsNames{"[OK]"};
         std::function<void()> clickCallback = [this] {
             mGuiController->clearModel();
             mGuiController->createFilters(mData);
             mGuiController->setPathToImages(mIO.mInputPathString);
-            mGuiController->okButton();};
+            std::function<void(std::string)> statusSetter =
+                    std::bind(&MainView::setStatus, this, std::placeholders::_1);
+            mGuiController->okButton(statusSetter);
+        };
         auto buttonLayout = createButton(buttonsNames, clickCallback);
         ftxui::Component status = createPathInput(mMenuData.mStatusLabel, mStatus);
         std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout, status};
@@ -40,23 +41,11 @@ namespace views {
     }
 
     ftxui::Component MainView::initRenderer(std::vector<ftxui::Component> &input) const {
-        auto layout = ftxui::Container::Vertical({
-                                                         input[0],
-                                                         input[1],
-                                                         input[2],
-                                                         input[3]
-                                                 });
+        auto layout = ftxui::Container::Vertical({input[0], input[1], input[2], input[3]});
 
         auto component = ftxui::Renderer(layout, [&] {
-            return ftxui::vbox({
-                                       input[0]->Render(),
-                                       ftxui::separator(),
-                                       input[1]->Render(),
-                                       ftxui::separator(),
-                                       input[2]->Render(),
-                                       ftxui::separator(),
-                                       input[3]->Render()
-                               }) |
+            return ftxui::vbox({input[0]->Render(), ftxui::separator(), input[1]->Render(), ftxui::separator(),
+                                input[2]->Render(), ftxui::separator(), input[3]->Render()}) |
                    ftxui::xflex | size(ftxui::WIDTH, ftxui::GREATER_THAN, 40) | ftxui::border;
         });
         return component;
@@ -77,12 +66,12 @@ namespace views {
     ftxui::Component MainView::Wrap(std::string name, ftxui::Component component) {
         return Renderer(component, [name, component] {
             return ftxui::hbox({
-                                       ftxui::text(name) | size(ftxui::WIDTH, ftxui::EQUAL, 8),
-                                       ftxui::separator(),
-                                       component->Render() | ftxui::xflex,
-                               }) |
+                           ftxui::text(name) | size(ftxui::WIDTH, ftxui::EQUAL, 8),
+                           ftxui::separator(),
+                           component->Render() | ftxui::xflex,
+                   }) |
                    ftxui::xflex;
         });
     }
-}
-
+    void MainView::setStatus(std::string status) { mStatus = status; }
+}// namespace views

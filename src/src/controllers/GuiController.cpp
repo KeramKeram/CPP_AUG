@@ -19,10 +19,11 @@ namespace controllers {
         mModel->clear();
     }
 
-    void GuiController::okButton() {
+    void GuiController::okButton(std::function<void(std::string)>& statusCallback) {
         spdlog::info("call ok");
         controllers::AugumentationFacade augument(mPathImages, mModel);
         augument.runAugmentation();
+        statusCallback("Finished");
     }
 
     GuiController::GuiController() {

@@ -5,6 +5,7 @@
 #include "filters/IFilterCommand.h"
 #include "models/OperationModel.h"
 
+#include <functional>
 #include <string>
 
 namespace controllers {
@@ -16,7 +17,7 @@ namespace controllers {
 
         void clearModel();
 
-        void okButton();
+        void okButton(std::function<void(std::string)>& statusCallback);
 
     private:
         std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
