@@ -9,7 +9,7 @@ namespace views {
         mIO.mInputPathString = path;
     }
 
-    auto MainView::createButtons(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
+    auto MainView::createButton(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback) {
         mButtonOption = ftxui::ButtonOption();
 
         auto buttonsLayout = ftxui::Container::Horizontal({Button(buttonsNames[0],
@@ -31,7 +31,7 @@ namespace views {
             mGuiController->createFilters(mData);
             mGuiController->setPathToImages(mIO.mInputPathString);
             mGuiController->okButton();};
-        auto buttonLayout = createButtons(buttonsNames, clickCallback);
+        auto buttonLayout = createButton(buttonsNames, clickCallback);
 
         std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout};
         ftxui::Component component = initRenderer(elements);
