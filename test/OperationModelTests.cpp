@@ -32,6 +32,24 @@ TEST_CASE("Models with data", "[operationsmodel]")
         model.next();
         REQUIRE(model.hasNext() == false);
     }
+
+    SECTION("Test resetting iterator.") {
+        model.add(item1);
+        auto item2 = std::make_shared<int>(2);
+        model.add(item2);
+        model.next();
+        model.next();
+        model.resetIterator();
+        REQUIRE(model.hasNext() == true);
+    }
+
+    SECTION("Test resetting iterator and check if correct value is return.") {
+        model.add(item1);
+        auto item2 = std::make_shared<int>(2);
+        model.add(item2);
+        auto item = model.next();
+        REQUIRE(*item == 1);
+    }
 }
 
 TEST_CASE("Models with no items", "[operationsmodel]")
