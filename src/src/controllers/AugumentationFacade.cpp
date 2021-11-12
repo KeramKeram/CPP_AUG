@@ -1,5 +1,5 @@
-#include "common/NameGenerators.h"
 #include "controllers/AugumentationFacade.h"
+#include "common/NameGenerators.h"
 #include "io/Directory.h"
 #include "io/DirectoryFilter.h"
 #include "io/LoadOpencvImg.h"
@@ -23,7 +23,15 @@ namespace controllers {
         files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
         io::LoadOpencvImg loader;
         io::SaveImage saver;
-        for (const auto &path : files) { augumentImages(loader, saver, path); }
+        for (const auto &path : files) {
+            try {
+                augumentImages(loader, saver, path);
+            } catch (...) {
+                spdlog::error("Exception during augment file:" + path);
+                std::exception_ptr p = std::current_exception();
+                spdlog::error((p ? p.__cxa_exception_type()->name() : "null"));
+            };
+        }
     }
 
     void AugumentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
