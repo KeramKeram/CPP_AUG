@@ -35,6 +35,7 @@ namespace views {
     private:
 
         struct MainMenuStaticData {
+            // Path
             std::string mInputPathName{"Path"};
             // Rotation Menu
             std::vector<std::string> radioboxEntries = {
@@ -43,6 +44,8 @@ namespace views {
                     "Rotate 270",
             };
             std::string mRotationMenuName = "Rotation";
+            // Status
+            std::string mStatusLabel = "Status:";
         };
 
         auto createButton(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback);
@@ -64,5 +67,7 @@ namespace views {
         AugumentationData mData;
 
         IOData mIO;
+
+        std::string mStatus;
     };
 }

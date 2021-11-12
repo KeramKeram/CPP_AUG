@@ -32,8 +32,8 @@ namespace views {
             mGuiController->setPathToImages(mIO.mInputPathString);
             mGuiController->okButton();};
         auto buttonLayout = createButton(buttonsNames, clickCallback);
-
-        std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout};
+        ftxui::Component status = createPathInput(mMenuData.mStatusLabel, mStatus);
+        std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout, status};
         ftxui::Component component = initRenderer(elements);
 
         screen.Loop(component);
@@ -43,7 +43,8 @@ namespace views {
         auto layout = ftxui::Container::Vertical({
                                                          input[0],
                                                          input[1],
-                                                         input[2]
+                                                         input[2],
+                                                         input[3]
                                                  });
 
         auto component = ftxui::Renderer(layout, [&] {
@@ -52,7 +53,9 @@ namespace views {
                                        ftxui::separator(),
                                        input[1]->Render(),
                                        ftxui::separator(),
-                                       input[2]->Render()
+                                       input[2]->Render(),
+                                       ftxui::separator(),
+                                       input[3]->Render()
                                }) |
                    ftxui::xflex | size(ftxui::WIDTH, ftxui::GREATER_THAN, 40) | ftxui::border;
         });
