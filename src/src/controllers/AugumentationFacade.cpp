@@ -55,7 +55,6 @@ namespace controllers {
         std::stringstream ss;
         ss << parentDir << "/output/" << std::to_string(millisec_since_epoch) << std::to_string(distrib(gen))
            << fileName;
-        spdlog::warn(ss.str());
         return ss.str();
     }
 }// namespace controllers
