@@ -5,38 +5,41 @@ TEST_CASE("Models with data", "[operationsmodel]")
 {
     models::OperationModel<int> model;
     auto item1 = std::make_shared<int>(1);
-
+    model.add(item1);
     SECTION("Test has next with one element.") {
-        model.add(item1);
         REQUIRE(model.hasNext() == true);
     }
 
     SECTION("Test take one element from one element model and check if has next.") {
-        model.add(item1);
         model.next();
         REQUIRE(model.hasNext() == false);
     }
 
+    auto item2 = std::make_shared<int>(2);
+    model.add(item2);
+
+    SECTION("Test checking if returned first element is correct.") {
+        auto item = model.next();
+        REQUIRE(*item == 1);
+    }
+
+    SECTION("Test checking if returned last element is correct.") {
+        auto item = model.next();
+        item = model.next();
+        REQUIRE(*item == 2);
+    }
+
     SECTION("Test has next with two element.") {
-        model.add(item1);
-        auto item2 = std::make_shared<int>(2);
-        model.add(item2);
         REQUIRE(model.hasNext() == true);
     }
 
     SECTION("Test with two element on the should not be next element.") {
-        model.add(item1);
-        auto item2 = std::make_shared<int>(2);
-        model.add(item2);
         model.next();
         model.next();
         REQUIRE(model.hasNext() == false);
     }
 
     SECTION("Test resetting iterator.") {
-        model.add(item1);
-        auto item2 = std::make_shared<int>(2);
-        model.add(item2);
         model.next();
         model.next();
         model.resetIterator();
@@ -44,8 +47,6 @@ TEST_CASE("Models with data", "[operationsmodel]")
     }
 
     SECTION("Test resetting iterator and check if correct value is return.") {
-        model.add(item1);
-        auto item2 = std::make_shared<int>(2);
         model.add(item2);
         auto item = model.next();
         REQUIRE(*item == 1);
