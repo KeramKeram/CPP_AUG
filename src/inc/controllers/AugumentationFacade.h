@@ -18,6 +18,5 @@ namespace controllers {
         std::string mImagesPath;
         std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
         void augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path);
-        std::string generateFileName(const std::string &path) const;
     };
 }// namespace controllers
