@@ -67,7 +67,7 @@ set(HEADER_FILES inc/io/ILoadImg.h
         inc/views/IView.h
         inc/factories/RotationFilterFactory.h
         inc/io/Directory.h inc/io/DirectoryFilter.h
-        inc/controllers/AugumentationFacade.h inc/io/ISaveImg.h inc/io/SaveOpencvImg.h)
+        inc/controllers/AugumentationFacade.h inc/io/ISaveImg.h inc/io/SaveOpencvImg.h inc/common/NameGenerators.h)
 
 
 set(SOURCE_FILES src/io/LoadOpencvImg.cpp
@@ -77,7 +77,7 @@ set(SOURCE_FILES src/io/LoadOpencvImg.cpp
         src/views/MainView.cpp
         src/factories/RotationFilterFactory.cpp
         src/io/Directory.cpp src/io/DirectoryFilter.cpp
-        src/controllers/AugumentationFacade.cpp src/io/SaveOpencvImg.cpp)
+        src/controllers/AugumentationFacade.cpp src/io/SaveOpencvImg.cpp src/common/NameGenerators.cpp)
 
 
 # Generic test that uses conan libs
