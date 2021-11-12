@@ -69,8 +69,8 @@ namespace views {
     }
 
     ftxui::Component MainView::createPathInput(std::string &name, std::string &inputString) {
-        auto input = ftxui::Input(&inputString, name);
-        input = Wrap("Input", input);
+        auto input = ftxui::Input(&inputString, "");
+        input = Wrap(name, input);
         return input;
     }
 

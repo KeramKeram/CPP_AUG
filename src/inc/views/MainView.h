@@ -45,7 +45,7 @@ namespace views {
             };
             std::string mRotationMenuName = "Rotation";
             // Status
-            std::string mStatusLabel = "Status:";
+            std::string mStatusLabel = "Status";
         };
 
         auto createButton(std::vector<std::string> &buttonsNames, std::function<void()> &clickCallback);
