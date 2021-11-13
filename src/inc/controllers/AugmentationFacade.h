@@ -22,7 +22,7 @@ namespace controllers {
 
         void stop();
 
-        bool getThreadStatus() const;
+        bool getAugmentationStatus() const;
 
     private:
 

@@ -60,7 +60,7 @@ namespace controllers {
         }
         mModel->resetIterator();
     }
-    bool AugmentationFacade::getThreadStatus() const {
+    bool AugmentationFacade::getAugmentationStatus() const {
         return mRun.load();
     }
 }// namespace controllers
