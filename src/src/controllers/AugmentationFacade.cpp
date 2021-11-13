@@ -39,7 +39,7 @@ namespace controllers {
         for (const auto &path : files) {
             if (mRun.load() == false) { break; }
             try {
-                augumentImages(loader, saver, path);
+                augmentImages(loader, saver, path);
             } catch (...) {
                 spdlog::error("Exception during augment file:" + path);
                 std::exception_ptr p = std::current_exception();
@@ -50,7 +50,7 @@ namespace controllers {
         mRun.store(false);
     }
 
-    void AugmentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
+    void AugmentationFacade::augmentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
         auto img = loader.loadImage(path);
         while (mModel->hasNext()) {
             auto filter = mModel->next();

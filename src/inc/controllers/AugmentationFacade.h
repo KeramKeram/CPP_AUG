@@ -26,7 +26,7 @@ namespace controllers {
 
         void runAugmentation();
 
-        void augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path);
+        void augmentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path);
 
         std::atomic_bool mRun;
         std::thread mTask;
