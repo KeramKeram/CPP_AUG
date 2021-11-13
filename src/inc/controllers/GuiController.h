@@ -2,8 +2,7 @@
 
 #include "common/CommonEnums.h"
 #include "common/CommonStructs.h"
-#include "controllers/AugumentationFacade.h"
-#include "controllers/AugumentationFacade.h"
+#include "controllers/AugmentationFacade.h"
 #include "filters/IFilterCommand.h"
 #include "models/OperationModel.h"
 
@@ -28,6 +27,6 @@ namespace controllers {
 
         std::string mPathImages;
 
-        controllers::AugumentationFacade mAugment;
+        controllers::AugmentationFacade mAugment;
     };
 }

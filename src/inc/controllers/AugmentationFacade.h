@@ -10,11 +10,11 @@
 #include <thread>
 
 namespace controllers {
-    class AugumentationFacade {
+    class AugmentationFacade {
     public:
-        AugumentationFacade() = default;
+        AugmentationFacade() = default;
 
-        ~AugumentationFacade();
+        ~AugmentationFacade();
 
         void start(const std::string &imgPath,
                    std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel,

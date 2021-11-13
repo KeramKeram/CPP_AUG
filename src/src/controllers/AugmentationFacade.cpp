@@ -1,4 +1,4 @@
-#include "controllers/AugumentationFacade.h"
+#include "controllers/AugmentationFacade.h"
 #include "common/NameGenerators.h"
 #include "io/Directory.h"
 #include "io/DirectoryFilter.h"
@@ -13,23 +13,23 @@
 namespace controllers {
     constexpr char subFolder[] = "output";
 
-    AugumentationFacade::~AugumentationFacade() { this->stop(); }
+    AugmentationFacade::~AugmentationFacade() { this->stop(); }
 
-    void AugumentationFacade::start(const std::string &imgPath,
+    void AugmentationFacade::start(const std::string &imgPath,
                                     std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel,
                                     std::function<void(std::string)> statusCallback) {
         mImagesPath = imgPath;
         mModel = filterModel;
         mStatusCallback = statusCallback;
-        this->mTask = std::thread(&AugumentationFacade::runAugmentation, this);
+        this->mTask = std::thread(&AugmentationFacade::runAugmentation, this);
     }
 
-    void AugumentationFacade::stop() {
+    void AugmentationFacade::stop() {
         mRun.store(false);
         if (mTask.joinable()) { mTask.join(); }
     }
 
-    void AugumentationFacade::runAugmentation() {
+    void AugmentationFacade::runAugmentation() {
         mRun.store(true);
         std::filesystem::create_directory(mImagesPath + "/" + subFolder);
         auto files = io::Directory::loadFilesList(mImagesPath);
@@ -50,12 +50,12 @@ namespace controllers {
         mRun.store(false);
     }
 
-    void AugumentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
+    void AugmentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
         auto img = loader.loadImage(path);
         while (mModel->hasNext()) {
             auto filter = mModel->next();
-            auto augumentImg = filter->execute(img);
-            saver.saveImageOCV(augumentImg, common::generateNewRandomFilePath(subFolder, path));
+            auto augmentImg = filter->execute(img);
+            saver.saveImageOCV(augmentImg, common::generateNewRandomFilePath(subFolder, path));
         }
         mModel->resetIterator();
     }
