@@ -2,10 +2,11 @@
 
 namespace views {
 
-    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController) : mGuiController(guiController) {}
+    MainView::MainView(std::shared_ptr<controllers::GuiController> guiController)
+        : mGuiController(guiController), mScreen(ftxui::ScreenInteractive::FitComponent()) {}
 
     MainView::MainView(std::shared_ptr<controllers::GuiController> guiController, std::string path)
-        : mGuiController(guiController) {
+        : mGuiController(guiController), mScreen(ftxui::ScreenInteractive::FitComponent()) {
         mIO.mInputPathString = path;
     }
 
@@ -18,8 +19,6 @@ namespace views {
     }
 
     void MainView::show() {
-        auto screen = ftxui::ScreenInteractive::FitComponent();
-
         ftxui::Component input = createPathInput(mMenuData.mInputPathName, mIO.mInputPathString);
         auto radiobox = createRadioBox(mMenuData.mRotationMenuName, mData.selectedRotation, mMenuData.radioboxEntries);
 
@@ -38,7 +37,7 @@ namespace views {
         std::vector<ftxui::Component> elements = {input, radiobox, buttonLayout, status};
         ftxui::Component component = initRenderer(elements);
 
-        screen.Loop(component);
+        mScreen.Loop(component);
     }
 
     ftxui::Component MainView::initRenderer(std::vector<ftxui::Component> &input) const {
@@ -74,5 +73,11 @@ namespace views {
                    ftxui::xflex;
         });
     }
-    void MainView::setStatus(std::string status) { mStatus = status; }
+    void MainView::setStatus(std::string status) {
+        mStatus = status;
+        // This part is required to refresh view. FTXUI have no direct method to repaint view. We send fake mouse event.
+        ftxui::Mouse mouse;
+        ftxui::Event event = ftxui::Event::Mouse("", mouse);
+        mScreen.PostEvent(event);
+    }
 }// namespace views

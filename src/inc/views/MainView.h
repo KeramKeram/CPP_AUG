@@ -70,5 +70,7 @@ namespace views {
         IOData mIO;
 
         std::string mStatus;
+
+        ftxui::ScreenInteractive mScreen;
     };
 }// namespace views
