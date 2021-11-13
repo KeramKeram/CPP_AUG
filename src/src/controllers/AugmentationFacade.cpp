@@ -48,6 +48,7 @@ namespace controllers {
             };
         }
         mStatusCallback("Finished");
+        mRun.store(false);
     }
 
     void AugmentationFacade::augmentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
@@ -58,5 +59,8 @@ namespace controllers {
             saver.saveImageOCV(augmentImg, common::generateNewRandomFilePath(subFolder, path));
         }
         mModel->resetIterator();
+    }
+    bool AugmentationFacade::getThreadStatus() const {
+        return mRun.load();
     }
 }// namespace controllers

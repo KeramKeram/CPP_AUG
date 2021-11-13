@@ -22,6 +22,8 @@ namespace controllers {
 
         void stop();
 
+        bool getThreadStatus() const;
+
     private:
 
         void runAugmentation();
