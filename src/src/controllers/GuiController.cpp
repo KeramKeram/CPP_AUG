@@ -1,7 +1,6 @@
 #include "controllers/GuiController.h"
 #include "factories/RotationFilterFactory.h"
 #include "spdlog/spdlog.h"
-#include "controllers/AugumentationFacade.h"
 
 namespace controllers {
 
@@ -19,11 +18,9 @@ namespace controllers {
         mModel->clear();
     }
 
-    void GuiController::okButton(std::function<void(std::string)>& statusCallback) {
+    void GuiController::okButton(std::function<void(std::string)> statusCallback) {
         spdlog::info("call ok");
-        controllers::AugumentationFacade augument(mPathImages, mModel);
-        augument.runAugmentation();
-        statusCallback("Finished");
+        mAugment.start(mPathImages, mModel, statusCallback);
     }
 
     GuiController::GuiController() {
