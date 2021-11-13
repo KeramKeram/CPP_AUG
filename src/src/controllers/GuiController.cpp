@@ -20,6 +20,9 @@ namespace controllers {
 
     void GuiController::okButton(std::function<void(std::string)> statusCallback) {
         spdlog::info("call ok");
+        if (mAugment.getThreadStatus()) {
+            spdlog::info("Augmentation in progress, ignore request for start again.");
+        }
         mAugment.start(mPathImages, mModel, statusCallback);
     }
 
