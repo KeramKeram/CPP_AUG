@@ -37,7 +37,7 @@ namespace controllers {
         io::LoadOpencvImg loader;
         io::SaveImage saver;
         for (const auto &path : files) {
-            if (mRun.load() == false) { return; }
+            if (mRun.load() == false) { break; }
             try {
                 augumentImages(loader, saver, path);
             } catch (...) {
