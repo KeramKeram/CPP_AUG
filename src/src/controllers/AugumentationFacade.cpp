@@ -13,17 +13,29 @@
 namespace controllers {
     constexpr char subFolder[] = "output";
 
-    AugumentationFacade::AugumentationFacade(
-            const std::string &imgPath, std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel)
-        : mImagesPath(imgPath), mModel(filterModel) {}
+    AugumentationFacade::~AugumentationFacade() { this->stop(); }
+
+    void AugumentationFacade::start(const std::string &imgPath,
+                                    std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel) {
+        mImagesPath = imgPath;
+        mModel = filterModel;
+        this->mTask = std::thread(&AugumentationFacade::runAugmentation, this);
+    }
+
+    void AugumentationFacade::stop() {
+        mRun.store(false);
+        if (mTask.joinable()) { mTask.join(); }
+    }
 
     void AugumentationFacade::runAugmentation() {
+        mRun.store(true);
         std::filesystem::create_directory(mImagesPath + "/" + subFolder);
         auto files = io::Directory::loadFilesList(mImagesPath);
         files = io::DirectoryFilter::filterByExtension(files, {".jpg", ".png"});
         io::LoadOpencvImg loader;
         io::SaveImage saver;
         for (const auto &path : files) {
+            if (mRun.load() == false) { return; }
             try {
                 augumentImages(loader, saver, path);
             } catch (...) {
@@ -32,6 +44,7 @@ namespace controllers {
                 spdlog::error((p ? p.__cxa_exception_type()->name() : "null"));
             };
         }
+        mRun.store(false);
     }
 
     void AugumentationFacade::augumentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
@@ -43,5 +56,4 @@ namespace controllers {
         }
         mModel->resetIterator();
     }
-
 }// namespace controllers

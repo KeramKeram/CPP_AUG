@@ -2,6 +2,8 @@
 
 #include "common/CommonEnums.h"
 #include "common/CommonStructs.h"
+#include "controllers/AugumentationFacade.h"
+#include "controllers/AugumentationFacade.h"
 #include "filters/IFilterCommand.h"
 #include "models/OperationModel.h"
 
@@ -19,11 +21,13 @@ namespace controllers {
 
         void okButton(std::function<void(std::string)>& statusCallback);
 
+        void setPathToImages(const std::string &path);
+
     private:
         std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
 
         std::string mPathImages;
-    public:
-        void setPathToImages(const std::string &path);
+
+        controllers::AugumentationFacade mAugment;
     };
 }
