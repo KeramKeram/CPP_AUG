@@ -22,6 +22,7 @@ namespace controllers {
         spdlog::info("call ok");
         if (mAugment.getThreadStatus()) {
             spdlog::info("Augmentation in progress, ignore request for start again.");
+            return;
         }
         mAugment.start(mPathImages, mModel, statusCallback);
     }
