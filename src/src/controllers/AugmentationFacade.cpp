@@ -22,6 +22,7 @@ namespace controllers {
         mModel = filterModel;
         mStatusCallback = statusCallback;
         this->mTask = std::thread(&AugmentationFacade::runAugmentation, this);
+        mTask.detach();
     }
 
     void AugmentationFacade::stop() {
@@ -47,7 +48,6 @@ namespace controllers {
             };
         }
         mStatusCallback("Finished");
-        mRun.store(false);
     }
 
     void AugmentationFacade::augmentImages(io::LoadOpencvImg &loader, io::SaveImage &saver, const std::string &path) {
