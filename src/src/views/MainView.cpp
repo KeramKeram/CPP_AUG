@@ -28,9 +28,7 @@ namespace views {
             mGuiController->clearModel();
             mGuiController->createFilters(mData);
             mGuiController->setPathToImages(mIO.mInputPathString);
-            std::function<void(std::string)> statusSetter =
-                    std::bind(&MainView::setStatus, this, std::placeholders::_1);
-            mGuiController->okButton(statusSetter);
+            mGuiController->okButton(std::bind(&MainView::setStatus, this, std::placeholders::_1));
         };
         auto buttonLayout = createButton(buttonsNames, clickCallback);
         ftxui::Component status = createPathInput(mMenuData.mStatusLabel, mStatus);
