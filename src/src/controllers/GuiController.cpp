@@ -18,10 +18,9 @@ namespace controllers {
         mModel->clear();
     }
 
-    void GuiController::okButton(std::function<void(std::string)>& statusCallback) {
+    void GuiController::okButton(std::function<void(std::string)> statusCallback) {
         spdlog::info("call ok");
-        mAugment.start(mPathImages, mModel);
-        statusCallback("Finished");
+        mAugment.start(mPathImages, mModel, statusCallback);
     }
 
     GuiController::GuiController() {

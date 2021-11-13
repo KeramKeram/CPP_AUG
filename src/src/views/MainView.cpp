@@ -25,6 +25,7 @@ namespace views {
 
         std::vector<std::string> buttonsNames{"[OK]"};
         std::function<void()> clickCallback = [this] {
+            setStatus("Working");
             mGuiController->clearModel();
             mGuiController->createFilters(mData);
             mGuiController->setPathToImages(mIO.mInputPathString);

@@ -17,7 +17,8 @@ namespace controllers {
         ~AugumentationFacade();
 
         void start(const std::string &imgPath,
-                   std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel);
+                   std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel,
+                   std::function<void(std::string)> statusCallback);
 
         void stop();
 
@@ -31,6 +32,6 @@ namespace controllers {
         std::thread mTask;
         std::string mImagesPath;
         std::shared_ptr<models::OperationModel<filters::IFilterCommand>> mModel;
-
+        std::function<void(std::string)> mStatusCallback;
     };
 }// namespace controllers

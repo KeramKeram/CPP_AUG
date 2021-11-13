@@ -16,9 +16,11 @@ namespace controllers {
     AugumentationFacade::~AugumentationFacade() { this->stop(); }
 
     void AugumentationFacade::start(const std::string &imgPath,
-                                    std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel) {
+                                    std::shared_ptr<models::OperationModel<filters::IFilterCommand>> filterModel,
+                                    std::function<void(std::string)> statusCallback) {
         mImagesPath = imgPath;
         mModel = filterModel;
+        mStatusCallback = statusCallback;
         this->mTask = std::thread(&AugumentationFacade::runAugmentation, this);
     }
 
@@ -44,6 +46,7 @@ namespace controllers {
                 spdlog::error((p ? p.__cxa_exception_type()->name() : "null"));
             };
         }
+        mStatusCallback("Finished");
         mRun.store(false);
     }
 

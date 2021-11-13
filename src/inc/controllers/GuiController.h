@@ -19,7 +19,7 @@ namespace controllers {
 
         void clearModel();
 
-        void okButton(std::function<void(std::string)>& statusCallback);
+        void okButton(std::function<void(std::string)> statusCallback);
 
         void setPathToImages(const std::string &path);
 
